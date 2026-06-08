@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Design Packages — Your Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --bg:        #0c0c0e;
+      --bg-soft:   #131316;
+      --panel:     #17171b;
+      --panel-2:   #1d1d22;
+      --line:      rgba(255,255,255,0.08);
+      --line-gold: rgba(201,162,70,0.30);
+      --text:      #efece4;
+      --muted:     #a39f96;
+      --muted-2:   #7c7870;
+      --gold:      #c9a246;
+      --gold-soft: #d8bd74;
+      --gold-grad: linear-gradient(135deg,#f3dd9b 0%,#c9a246 45%,#9c7a2a 100%);
+      --serif: "Cormorant Garamond","Playfair Display",Georgia,serif;
+      --sans:  "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --r: 12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    ul { list-style: none; padding: 0; }
+    a  { color: inherit; text-decoration: none; }
+
+    /* ── Page wrapper ── */
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 32px 56px;
+    }
+
+    /* ── Header ── */
+    .hd {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line-gold);
+      padding-bottom: 22px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .brand {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+    }
+    .brand .dot { color: var(--gold); }
+    .tagline {
+      font-size: 0.75rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+    .contact-strip {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .contact-strip a { color: var(--gold-soft); }
+
+    /* ── Section label ── */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      margin-bottom: 6px;
+    }
+    .eyebrow::before, .eyebrow::after {
+      content: ""; display: inline-block; width: 22px; height: 1px; background: var(--gold);
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 600;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    /* ── Pricing grid ── */
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .plan {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 28px 22px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .plan--featured {
+      border-color: var(--gold);
+      background:
+        radial-gradient(500px 220px at 50% -5%, rgba(201,162,70,0.18), transparent 60%),
+        var(--panel-2);
+    }
+    .badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--gold-grad);
+      color: #1a1407;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 999px; white-space: nowrap;
+    }
+    .plan__name {
+      font-family: var(--serif);
+      font-size: 1.45rem; font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .plan__sub {
+      font-size: 0.8rem; color: var(--muted);
+      min-height: 36px; margin-bottom: 14px;
+    }
+    .plan__price {
+      display: flex; align-items: baseline; gap: 4px;
+      margin-bottom: 2px;
+    }
+    .cur { font-family: var(--serif); font-size: 1.1rem; color: var(--gold-soft); }
+    .amt { font-family: var(--serif); font-size: 2.6rem; line-height: 1; }
+    .plan__note { font-size: 0.73rem; color: var(--muted-2); margin-bottom: 18px; }
+    .features { display: grid; gap: 9px; margin-bottom: 20px; flex: 1; }
+    .features li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 0.85rem; color: var(--muted);
+    }
+    .features li svg { flex: none; width: 14px; height: 14px; color: var(--gold); margin-top: 2px; }
+    .features li.off { opacity: 0.45; }
+    .features li.off svg { color: var(--muted-2); }
+    .plan__cta {
+      display: block; width: 100%; text-align: center;
+      padding: 10px 0; border-radius: 999px;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em;
+      border: 1px solid var(--line-gold); color: var(--text);
+    }
+    .plan--featured .plan__cta {
+      background: var(--gold-grad);
+      color: #1a1407; border: none;
+    }
+
+    /* ── Add-ons ── */
+    .addons-section { margin-bottom: 32px; }
+    .addons-section .section-title { margin-bottom: 14px; }
+    .addons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .addon {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .addon h4 { font-family: var(--sans); font-size: 0.88rem; font-weight: 600; }
+    .addon p { font-size: 0.73rem; color: var(--muted-2); margin-top: 2px; }
+    .addon .price { font-family: var(--serif); font-size: 1.25rem; color: var(--gold-soft); white-space: nowrap; }
+
+    /* ── Process strip ── */
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .step { padding-top: 10px; }
+    .step-num {
+      font-family: var(--serif); font-size: 2rem; color: var(--gold); opacity: 0.4;
+      display: block; line-height: 1; margin-bottom: 6px;
+    }
+    .step h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+    .step p { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── Footer band ── */
+    .foot {
+      border-top: 1px solid var(--line-gold);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .foot p { font-size: 0.75rem; color: var(--muted-2); }
+    .foot .cta-btns { display: flex; gap: 10px; }
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold-grad);
+      color: #1a1407;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 9px 20px; border-radius: 999px;
+      letter-spacing: 0.03em;
+    }
+    .btn-ghost {
+      display: inline-block;
+      border: 1px solid var(--line-gold);
+      color: var(--text);
+      font-size: 0.82rem; font-weight: 600;
+      padding: 9px 20px; border-radius: 999px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: #fff; color: #111; font-size: 11.5px; }
+      :root {
+        --bg: #fff; --bg-soft: #f5f4f0; --panel: #f9f8f5;
+        --panel-2: #f3f1ec; --line: rgba(0,0,0,0.1);
+        --line-gold: rgba(140,100,20,0.30);
+        --text: #1a1a18; --muted: #5a5751; --muted-2: #8a8680;
+        --gold: #9a7520; --gold-soft: #b08830;
+        --gold-grad: linear-gradient(135deg,#d4a830 0%,#9a7520 100%);
+      }
+      .page { padding: 20px 28px; }
+      @page { margin: 14mm; size: A4; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 680px) {
+      .plans, .addons, .process { grid-template-columns: 1fr; }
+      .hd { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <header class="hd">
+    <div>
+      <div class="brand">Your Studio<span class="dot">.</span></div>
+      <div class="tagline">Web Design for Local Businesses</div>
+    </div>
+    <div class="contact-strip">
+      <!-- EDIT ME → your real contact info -->
+      <span><a href="mailto:you@email.com">you@email.com</a></span>
+      <span><a href="tel:+10000000000">+1 (000) 000-0000</a></span>
+    </div>
+  </header>
+
+  <!-- Pricing -->
+  <div style="text-align:center;margin-bottom:24px;">
+    <div class="eyebrow">Packages</div>
+    <div class="section-title">Simple, fixed-price plans</div>
+  </div>
+
+  <div class="plans">
+
+    <!-- Starter -->
+    <div class="plan">
+      <div class="plan__name">Starter</div>
+      <div class="plan__sub">A sharp one-page site to get a brand online fast.</div>
+      <div class="plan__price"><span class="cur">$</span><span class="amt">290</span></div>
+      <div class="plan__note">One-time · ready in ~1 week</div>
+      <ul class="features">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>One-page website</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mobile &amp; tablet ready</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Contact form &amp; map</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Social media links</li>
+        <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>Multiple pages</li>
+        <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>Online booking / shop</li>
+      </ul>
+      <a class="plan__cta" href="mailto:you@email.com">Choose Starter</a>
+    </div>
+
+    <!-- Professional (featured) -->
+    <div class="plan plan--featured">
+      <span class="badge">Most Popular</span>
+      <div class="plan__name">Standard</div>
+      <div class="plan__sub">A complete multi-page site for an established brand.</div>
+      <div class="plan__price"><span class="cur">$</span><span class="amt">590</span></div>
+      <div class="plan__note">One-time · ready in ~2 weeks</div>
+      <ul class="features">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 6 pages</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Starter</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Photo gallery &amp; reviews</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Google / SEO basics</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>WhatsApp / chat button</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>2 rounds of revisions</li>
+      </ul>
+      <a class="plan__cta" href="mailto:you@email.com">Choose Standard</a>
+    </div>
+
+    <!-- Premium -->
+    <div class="plan">
+      <div class="plan__name">Premium</div>
+      <div class="plan__sub">Custom design with booking or online store.</div>
+      <div class="plan__price"><span class="cur">$</span><span class="amt">1,200</span></div>
+      <div class="plan__note">One-time · ready in ~3–4 weeks</div>
+      <ul class="features">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Standard</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Online booking or shop</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom one-of-a-kind design</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Copywriting included</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited revisions (30 days)</li>
+      </ul>
+      <a class="plan__cta" href="mailto:you@email.com">Choose Premium</a>
+    </div>
+
+  </div>
+
+  <p style="font-size:0.73rem;color:var(--muted-2);text-align:center;margin-bottom:32px;">
+    All packages include hosting setup &amp; a free domain for the first year. Prices exclude tax.
+  </p>
+
+  <!-- Add-ons -->
+  <div class="addons-section">
+    <div style="text-align:center;margin-bottom:14px;">
+      <div class="eyebrow">Optional Extras</div>
+      <div class="section-title" style="font-size:1.5rem;">Care plan &amp; add-ons</div>
+    </div>
+    <div class="addons">
+      <div class="addon">
+        <div><h4>Care &amp; Hosting Plan</h4><p>Hosting, backups &amp; small edits/month</p></div>
+        <span class="price">$20<span style="font-size:0.75rem;color:var(--muted-2);">/mo</span></span>
+      </div>
+      <div class="addon">
+        <div><h4>Logo &amp; Brand Kit</h4><p>Custom logo, colors &amp; fonts</p></div>
+        <span class="price">$110</span>
+      </div>
+      <div class="addon">
+        <div><h4>Extra Page</h4><p>Any additional page beyond plan</p></div>
+        <span class="price">$55</span>
+      </div>
+      <div class="addon">
+        <div><h4>Photography Session</h4><p>Professional photos of the business</p></div>
+        <span class="price">$180</span>
+      </div>
+      <div class="addon">
+        <div><h4>Google Business Setup</h4><p>Get found on Google Maps &amp; Search</p></div>
+        <span class="price">$75</span>
+      </div>
+      <div class="addon">
+        <div><h4>Extra Language</h4><p>Full site translation</p></div>
+        <span class="price">$120</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process -->
+  <div style="margin-bottom:28px;">
+    <div style="text-align:center;margin-bottom:14px;">
+      <div class="eyebrow">How It Works</div>
+      <div class="section-title" style="font-size:1.5rem;">From idea to live in 4 steps</div>
+    </div>
+    <div class="process">
+      <div class="step"><span class="step-num">01</span><h4>Chat</h4><p>We discuss the business, the goals, and pick the right package.</p></div>
+      <div class="step"><span class="step-num">02</span><h4>Content</h4><p>You send photos &amp; details — or I help create them for you.</p></div>
+      <div class="step"><span class="step-num">03</span><h4>Design</h4><p>I build the site, share a preview, you request changes.</p></div>
+      <div class="step"><span class="step-num">04</span><h4>Launch</h4><p>We go live, connect your domain, and you start getting found.</p></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="foot">
+    <div>
+      <p>50% deposit to start · 50% on launch &nbsp;|&nbsp; Mobile-ready · Fast · Yours to keep</p>
+      <p style="margin-top:4px;">© <span id="yr"></span> Your Studio · Websites for local brands</p>
+    </div>
+    <div class="cta-btns">
+      <!-- EDIT ME → your real email / phone -->
+      <a class="btn-gold" href="mailto:you@email.com">Email Me</a>
+      <a class="btn-ghost" href="tel:+10000000000">Call / WhatsApp</a>
+    </div>
+  </div>
+
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
